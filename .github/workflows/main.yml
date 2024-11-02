@@ -10,14 +10,14 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3 # 检出代码
+      uses: actions/checkout@main # 检出代码
 
     - name: Install dependencies
       run: |
         choco install perl
         choco install nasm
         choco install make
-        choco install visualstudio2019buildtools --yes
+        choco install visualstudio2019community --yes
         # 安装其他可能需要的依赖，如VC++ Build Tools等，如果需要可以添加
         
     - name: add NASM to path
@@ -39,7 +39,7 @@ jobs:
       shell: cmd
       run: |
         cd openssl
-        %comspec% /k ""C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\VsDevCmd.bat""
+        %comspec% /k ""C:\Program Files\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat""
         nmake
         nmake install
 
