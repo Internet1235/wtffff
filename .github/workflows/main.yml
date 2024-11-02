@@ -14,9 +14,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        choco install -y perl
-        choco install -y nasm
-        choco install -y make
+        choco install perl
+        choco install nasm
+        choco install make
         # 安装其他可能需要的依赖，如VC++ Build Tools等，如果需要可以添加
         
     - name: add NASM to path
