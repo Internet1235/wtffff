@@ -17,8 +17,8 @@ jobs:
         choco install perl
         choco install nasm
         choco install make
-        choco install visualstudio2019community --yes
-        choco install visualstudio2019-workload-nativedesktop --yes
+        choco install visualstudio2022community --yes
+        choco install visualstudio2022-workload-nativedesktop --yes
         # 安装其他可能需要的依赖，如VC++ Build Tools等，如果需要可以添加
         
     - name: add NASM to path
@@ -40,7 +40,7 @@ jobs:
       shell: cmd
       run: |
         cd openssl
-        %comspec% /k ""C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat""
+        %comspec% /k ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat""
         nmake
         nmake install
 
