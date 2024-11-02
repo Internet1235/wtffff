@@ -31,6 +31,7 @@ jobs:
     - name: add vstudio/nmake to path
       shell: cmd
       run: |
+        %comspec% /k ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat""
         set path="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64" # 将vstudio/nmake添加进环境变量中
         set path="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64" # 将vstudio/nmake添加进环境变量中
         set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64" # 将vstudio/nmake添加进环境变量中
