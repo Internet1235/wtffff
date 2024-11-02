@@ -39,7 +39,7 @@ jobs:
       shell: cmd
       run: |
         cd openssl
-        %comspec% /k ""C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat""
+        %comspec% /k ""C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Auxiliary\Build\vcvars64.bat""
         nmake
         nmake install
 
