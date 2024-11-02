@@ -53,8 +53,8 @@ jobs:
       run: |
         cd openssl
         %comspec% /k ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat""
-        nmake.exe
-        nmake.exe install
+        ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64\nmake.exe""
+        ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64\nmake.exe"" install
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v3
