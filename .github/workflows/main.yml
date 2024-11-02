@@ -31,7 +31,6 @@ jobs:
     - name: add vstudio/nmake to 环境变量
       shell: cmd
       run: |
-        %comspec% /k ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat""
         set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\HostX64\x64" # 将vstudio/nmake添加进环境变量中
         set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x86"
         set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE"
@@ -53,7 +52,6 @@ jobs:
       shell: cmd
       run: |
         cd openssl
-        %comspec% /k ""C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat""
         nmake
         nmake install
 
