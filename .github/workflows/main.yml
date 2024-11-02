@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main # 你可以根据需要修改触发的分支
+  workflow_dispatch:
 jobs:
   build:
     runs-on: windows-latest
@@ -25,6 +26,11 @@ jobs:
       shell: cmd
       run: |
         set path="C:\Program Files\NASM" # 将NASM添加进环境变量中
+
+    - name: add vstudio to path
+      shell: cmd
+      run: |
+        set path="D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x64" # 将NASM添加进环境变量中
      
     - name: Clone source code
       run: |
