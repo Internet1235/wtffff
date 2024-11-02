@@ -18,6 +18,7 @@ jobs:
         choco install nasm
         choco install make
         choco install visualstudio2019community --yes
+        choco install visualstudio2019-workload-nativedesktop --yes
         # 安装其他可能需要的依赖，如VC++ Build Tools等，如果需要可以添加
         
     - name: add NASM to path
