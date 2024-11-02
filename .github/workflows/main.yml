@@ -23,7 +23,7 @@ jobs:
     - name: add NASM to path
       shell: cmd
       run: |
-        set path="C:\Program Files\NASM"
+        set path="C:\Program Files\NASM" # 将NASM添加进环境变量中
      
     - name: Clone source code
       run: |
@@ -39,6 +39,7 @@ jobs:
       shell: cmd
       run: |
         cd openssl
+        %comspec% /k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
         nmake
         nmake install
 
