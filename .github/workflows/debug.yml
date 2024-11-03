@@ -2,7 +2,7 @@ name: debug
 on:
   push:
     branches:
-      - mai # 你可以根据需要修改触发的分支
+      - main # 你可以根据需要修改触发的分支
   workflow_dispatch:
 
 jobs:
