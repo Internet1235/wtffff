@@ -1,9 +1,6 @@
 name: Build OpenSSL on Windows
 
 on:
-  push:
-    branches:
-      - ma # 你可以根据需要修改触发的分支
   workflow_dispatch:
 
 jobs:
