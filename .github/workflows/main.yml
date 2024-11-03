@@ -4,7 +4,7 @@ name: Build OpenSSL on Windows
 on:
   push:
     branches:
-      - main # 你可以根据需要修改触发的分支
+      - mai # 你可以根据需要修改触发的分支
   workflow_dispatch:
 
 env: 
@@ -62,7 +62,7 @@ jobs:
         nmake install
 
     - name: Archive artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@main
       with:
         name: openssl-windows
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
