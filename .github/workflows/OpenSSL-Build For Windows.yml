@@ -33,15 +33,12 @@ jobs:
         perl Configure VC-WIN64A no-asm --prefix=C:\OpenSSL_build # 根据你的需求配置OpenSSL
 
     - name: Build OpenSSL
-      id: compile
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         cd openssl
         nmake
         nmake install
-        powershell
-        "{status}=success" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
@@ -50,20 +47,16 @@ jobs:
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Generate release tag
-      id: tag
-      if: steps.compile.outputs.status == 'success'
       run: |
         cd C:\
         7z a openssl-for-windows.zip for windows .\OpenSSL_build\
-        "release_tag=$(date +"%Y.%m.%d-%H%M")" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-        "{status}=success" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@master
-      if: steps.tag.outputs.status == 'success'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
+        tag: $(date +"%Y.%m.%d-%H%M")
+        tag_name: $(date +"%Y.%m.%d-%H%M")
         body_path: release.txt
         files: C:\openssl-for-windows.zip
