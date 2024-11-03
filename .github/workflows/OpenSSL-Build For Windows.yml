@@ -51,6 +51,7 @@ jobs:
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Generate release tag
+      if: env.ssl == 'true'
       run: |
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
