@@ -49,7 +49,7 @@ jobs:
     - name: Generate release tag
       run: |
         cd C:\
-        7z a openssl-for-windows.zip for windows .\OpenSSL_build\
+        7z a openssl-for-windows.zip .\OpenSSL_build\
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@master
