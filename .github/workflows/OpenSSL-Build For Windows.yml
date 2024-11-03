@@ -33,14 +33,11 @@ jobs:
         perl Configure VC-WIN64A no-asm --prefix=C:\OpenSSL_build # 根据你的需求配置OpenSSL
 
     - name: Build OpenSSL
-      id: compile
-      shell: cmd
       run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        %comspec% /k "D:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
         cd openssl
         nmake
         nmake install
-        echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
@@ -49,8 +46,6 @@ jobs:
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Generate release tag
-      id: tag
-      if: steps.compile.outputs.status == 'success'
       run: |
         cd C:\
         7z a openssl-for-windows.zip for windows .\OpenSSL_build\
