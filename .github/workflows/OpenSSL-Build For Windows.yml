@@ -61,5 +61,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: date +"%Y.%m.%d-%H%M"
+        tag_name: $date +"%Y.%m.%d-%H%M"
         files: C:\openssl-for-windows.zip
