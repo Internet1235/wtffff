@@ -22,7 +22,6 @@ jobs:
         choco install perl
         choco install nasm
         choco install make
-        choco install visualstudio2022buildtools --package-parameters "`"--add Microsoft.VisualStudio.Workload.NativeDesktop;includeRecommended`"" --yes
         choco install visualstudio2022community --yes
         choco install visualstudio2022-workload-nativedesktop --yes
         # 安装其他可能需要的依赖，如VC++ Build Tools等，如果需要可以添加
@@ -31,17 +30,6 @@ jobs:
       shell: cmd
       run: |
         set path="C:\Program Files\NASM" # 将NASM添加进环境变量中
-
-    - name: add vstudio/nmake to 环境变量
-      if: env.add_vs_to_path == true
-      shell: cmd
-      run: |
-        set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\HostX64\x64" # 将vstudio/nmake添加进环境变量中
-        set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\Hostx64\x86"
-        set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE"
-        set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools"
-        set lib=%lib%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64"
-        set lib=%lib%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include"
      
     - name: Clone source code
       run: |
