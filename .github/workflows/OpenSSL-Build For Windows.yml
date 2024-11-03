@@ -70,4 +70,4 @@ jobs:
       with:
         tag_name: ${{ steps.tag1.outputs.release_tag }}
         body_path: release.txt
-        文件: C:\openssl-for-windows.zip
+        files: C:\openssl-for-windows.zip
