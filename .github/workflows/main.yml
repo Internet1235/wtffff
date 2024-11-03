@@ -6,6 +6,10 @@ on:
     branches:
       - main # 你可以根据需要修改触发的分支
   workflow_dispatch:
+
+env: 
+  add_vs_to_path: false
+
 jobs:
   build:
     runs-on: windows-latest
@@ -29,6 +33,7 @@ jobs:
         set path="C:\Program Files\NASM" # 将NASM添加进环境变量中
 
     - name: add vstudio/nmake to 环境变量
+      if: env.add_vs_to_path == true
       shell: cmd
       run: |
         # set path=%path%;"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\bin\HostX64\x64" # 将vstudio/nmake添加进环境变量中
