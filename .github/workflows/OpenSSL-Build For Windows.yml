@@ -58,5 +58,4 @@ jobs:
       with:
         tag: $(date +"%Y.%m.%d-%H%M")
         tag_name: $(date +"%Y.%m.%d-%H%M")
-        body_path: release.txt
         files: C:\openssl-for-windows.zip
