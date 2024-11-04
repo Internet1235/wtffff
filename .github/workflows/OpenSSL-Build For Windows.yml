@@ -54,7 +54,7 @@ jobs:
     - name: Upload firmware to release
       uses: softprops/action-gh-release@master
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: openssl
         files: C:\openssl-for-windows.zip
