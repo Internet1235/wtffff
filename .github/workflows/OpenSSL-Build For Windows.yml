@@ -50,7 +50,7 @@ jobs:
       run:  .\nsis-3.10-setup.exe /s
 
     - name: Build installer
-      run: makensis -V2 windows-installer\windows.nsi
+      run: makensis -V2 windows-installer\install.nsi
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
