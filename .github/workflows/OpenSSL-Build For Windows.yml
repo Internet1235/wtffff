@@ -3,6 +3,9 @@ name: Build OpenSSL on Windows
 on:
   workflow_dispatch:
 
+env: 
+  ssl: false
+
 jobs:
   build:
     runs-on: windows-latest
@@ -33,6 +36,7 @@ jobs:
         perl Configure VC-WIN64A no-asm --prefix=C:\OpenSSL_build # 根据你的需求配置OpenSSL
 
     - name: Build OpenSSL
+      if: env.ssl == 'true'
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
@@ -47,6 +51,7 @@ jobs:
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Generate release tag
+      if: env.ssl == 'true'
       id: tag
       run: |
         cd C:\
