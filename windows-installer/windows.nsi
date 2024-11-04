@@ -13,9 +13,9 @@ Section
     SetOutPath $INSTDIR
 
     ; 假设你的 OpenSSL 有 bin、lib、include 等目录，这里以 bin 目录为例安装可执行文件
-    File /r "path\to\openssl\bin\*.*"
-    File /r "path\to\openssl\lib\*.*"
-    File /r "path\to\openssl\include\*.*"
+    File /r "C:\OpenSSL_build\bin\*.*"
+    File /r "C:\OpenSSL_build\lib\*.*"
+    File /r "C:\OpenSSL_build\include\*.*"
 
     ; 创建开始菜单快捷方式（这里假设 openssl.exe 是主要的可执行文件）
     CreateShortCut "$SMPROGRAMS\OpenSSL\openssl.exe.lnk" "$INSTDIR\bin\openssl.exe"
