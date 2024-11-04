@@ -52,6 +52,7 @@ jobs:
       id: tag
       if: steps.compile.outputs.status == 'success'
       run: |
+        Set-TimeZone -ID “China Standard Time”
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
         echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $env:GITHUB_OUTPUT
