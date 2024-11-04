@@ -47,14 +47,17 @@ jobs:
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Generate release tag
+      id: tag
       run: |
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
+        "tag-name=$(date +"%Y.%m.%d-%H%M")" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: openssl
+        tag_name: ${{ step.tag.outputs.tag-name}}
         files: C:\openssl-for-windows.zip
