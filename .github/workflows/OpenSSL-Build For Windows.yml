@@ -51,10 +51,10 @@ jobs:
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Generate release tag
-      if: env.ssl == 'true'
       id: tag
       run: |
         cd C:\
+        mkdir OpenSSL_build
         7z a openssl-for-windows.zip .\OpenSSL_build\
         "tag-name=$(date +"%Y.%m.%d-%H%M")" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
