@@ -56,7 +56,6 @@ jobs:
         cd C:\
         mkdir OpenSSL_build
         7z a openssl-for-windows.zip .\OpenSSL_build\
-        tzutil /s "China Standard Time
         "tag-name=$(date +"%Y.%m.%d-%H%M")" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
     - name: Upload firmware to release
