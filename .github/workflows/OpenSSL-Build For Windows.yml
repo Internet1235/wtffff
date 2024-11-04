@@ -51,7 +51,7 @@ jobs:
       run: |
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
-        "tag-name=$(date +"%Y.%m.%d-%H%M")" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
 
 
     - name: Upload firmware to release
