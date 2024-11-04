@@ -38,7 +38,7 @@ jobs:
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         cd openssl
         nmake /S
-        nmake install
+        nmake /S install
 
     - name: download NSIS installer
       uses: suisei-cn/actions-download-file@v1.6.0
