@@ -51,13 +51,12 @@ jobs:
       run: |
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
-        echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
-
+        "tag-name=$(date +"%Y.%m.%d-%H%M")" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ step.tag.outputs.tag-name }}
+        tag_name: ${{ steps.tag.outputs.tag-name }}
         files: C:\openssl-for-windows.zip
