@@ -45,6 +45,7 @@ jobs:
       with:
         url: "https://downloads.sourceforge.net/project/nsis/NSIS%203/3.10/nsis-3.10-setup.exe"
         target: _installer/
+
     - name: Install NSIS 3.10
       working-directory: _installer
       run:  .\nsis-3.10-setup.exe /s
