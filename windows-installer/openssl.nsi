@@ -77,8 +77,6 @@ SectionEnd
 
 !insertmacro MUI_PAGE_WELCOME
 
-!insertmacro MUI_PAGE_LICENSE ${LICENSE_FILE}
-
 Function CheckRunUninstaller
     ifFileExists $INSTDIR\uninstall.exe 0 +2
         ExecWait "$INSTDIR\uninstall.exe /S _?=$INSTDIR"
