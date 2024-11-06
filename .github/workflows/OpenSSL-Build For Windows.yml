@@ -54,18 +54,21 @@ jobs:
       run: makensis -V2 windows-installer\openssl.nsi
 
     - name: Archive artifacts
+      if: env.ssl == 'true'
       uses: actions/upload-artifact@main
       with:
         name: openssl-windows
         path: C:\OpenSSL_build # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Upload installer as artifact
+      if: env.ssl == 'true'
       uses: actions/upload-artifact@main
       with:
         name: openssl-installer
         path: windows-installer/openssl*.exe
 
     - name: Generate release tag
+      if: env.ssl == 'true'
       id: tag
       run: |
         Set-TimeZone -ID “China Standard Time”
