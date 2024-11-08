@@ -12,6 +12,7 @@
 
 !include "MUI.nsh"
 !include "winmessages.nsh"
+!include "WordFunc.nsh"
 
 !define PRODUCT_NAME "OpenSSL"
 !define VERSION "${MAJOR}.${MINOR}.${PATCH}"
@@ -78,19 +79,19 @@ SectionEnd
 !endif
 
 !ifdef BUILD64
-    Function ReadPathFromRegistry
+    Section "ReadPathFromRegistry"
         ReadRegStr $R0 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" 
         WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" "$R0;$INSTDIR\x86_64\bin"
         SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"   /TIMEOUT=5000
-    FunctionEnd
+    SectionEnd
 !endif
 
 !ifdef BUILD32
-    Function ReadPathFromRegistry
+    Section "ReadPathFromRegistry"
         ReadRegStr $R0 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" 
         WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" "$R0;$INSTDIR\x86\bin"
         SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"   /TIMEOUT=5000
-    FunctionEnd
+    SectionEnd
 !endif
 
 # Always install the uninstaller and set a registry key
