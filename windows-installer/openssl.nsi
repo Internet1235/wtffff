@@ -14,14 +14,15 @@
 !include "winmessages.nsh"
 
 !define PRODUCT_NAME "OpenSSL"
+!define VERSION "${MAJOR}.${MINOR}.${PATCH}"
 
 # The name of the output file we create when building this
 # NOTE major/minor/patch values are passed with the /D option
 # on the command line
-OutFile "openssl-installer.exe"
+OutFile "openssl-${VERSION}-installer.exe"
 
 # The name that will appear in the installer title bar
-NAME "${PRODUCT_NAME}"
+NAME "${PRODUCT_NAME} ${VERSION}"
 
 ShowInstDetails show
 
@@ -30,7 +31,7 @@ Var DataDir
 Var ModDir
 
 Function .onInit
-    StrCpy $INSTDIR "C:\OpenSSL_build"
+    StrCpy $INSTDIR "C:\Program Files\openssl-${MAJOR}.${MINOR}"
 FunctionEnd
 
 !ifdef BUILD64
@@ -38,15 +39,15 @@ FunctionEnd
 SectionGroup "64 Bit Installation"
     Section "64 Bit Binaries"
         SetOutPath $INSTDIR\x86_64\lib
-        File /r "C:\OpenSSL_build\lib\"
+        File /r "${BUILD64}\Program Files\OpenSSL\lib\"
         SetOutPath $INSTDIR\x86_64\bin
-        File /r "C:\OpenSSL_build\bin\"
+        File /r "${BUILD64}\Program Files\OpenSSL\bin\"
         SetOutPath "$INSTDIR\x86_64\Common Files"
-        File /r "C:\Program Files\Common Files\"
+        File /r "${BUILD64}\Program Files\Common Files\"
     SectionEnd
     Section "x86_64 Development Headers"
         SetOutPath $INSTDIR\x86_64\include
-        File /r "C:\OpenSSL_build\include\"
+        File /r "${BUILD64}\Program Files\OpenSSL\include\"
     SectionEnd
 SectionGroupEnd
 !endif
@@ -54,7 +55,7 @@ SectionGroupEnd
 !ifdef BUILD64
 Section "Documentation"
     SetOutPath $INSTDIR\html
-    File /r "C:\OpenSSL_build\html\"
+    File /r "${BUILD64}\Program Files\OpenSSL\html\"
 SectionEnd
 !endif
 
@@ -64,7 +65,7 @@ Section
 SectionEnd
 
 !define env_hklm 'HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"'
-!define openssl_hklm 'HKLM "SOFTWARE\OpenSSL"'
+!define openssl_hklm 'HKLM "SOFTWARE\OpenSSL-${MAJOR}.${MINOR}-${CTX}"'
 
 # This is run on uninstall
 Section "Uninstall"
@@ -76,6 +77,8 @@ Section "Uninstall"
 SectionEnd
 
 !insertmacro MUI_PAGE_WELCOME
+
+!insertmacro MUI_PAGE_LICENSE ${LICENSE_FILE}
 
 Function CheckRunUninstaller
     ifFileExists $INSTDIR\uninstall.exe 0 +2
@@ -125,6 +128,6 @@ FunctionEnd
 !define OutFileSignSHA1 "SignTool.exe sign /f ${SIGN} /p ${SIGNPASS} /fd sha1 /t http://timestamp.comodoca.com /v"
 !define OutFileSignSHA256 "SignTool.exe sign /f ${SIGN} /p ${SIGNPASS} /fd sha256 /tr http://timestamp.comodoca.com?td=sha256 /td sha256 /v"
 
-!finalize "${OutFileSignSHA1} .\openssl-installer.exe"
-!finalize "${OutFileSignSHA256} .\openssl-installer.exe"
+!finalize "${OutFileSignSHA1} .\openssl-${VERSION}-installer.exe"
+!finalize "${OutFileSignSHA256} .\openssl-${VERSION}-installer.exe"
 !endif
