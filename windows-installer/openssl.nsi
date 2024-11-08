@@ -52,6 +52,24 @@ SectionGroup "64 Bit Installation"
 SectionGroupEnd
 !endif
 
+!ifdef BUILD32
+# This section is run if installation of the 32 bit binaries are selectd
+SectionGroup "32 Bit Installation"
+    Section "32 Bit Binaries"
+        SetOutPath $INSTDIR\x86\lib
+        File /r "${BUILD32}\Program Files (x86)\OpenSSL\lib\"
+        SetOutPath $INSTDIR\x86\bin
+        File /r "${BUILD32}\Program Files (x86)\OpenSSL\bin\"
+        SetOutPath "$INSTDIR\x86\Common Files"
+        File /r "${BUILD32}\Program Files (x86)\Common Files\"
+    SectionEnd
+    Section "x86 Development Headers"
+        SetOutPath $INSTDIR\x86\include
+        File /r "${BUILD32}\Program Files (x86)\OpenSSL\include\"
+    SectionEnd
+SectionGroupEnd
+!endif
+
 !ifdef BUILD64
 Section "Documentation"
     SetOutPath $INSTDIR\html
