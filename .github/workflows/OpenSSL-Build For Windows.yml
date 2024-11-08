@@ -9,7 +9,7 @@ env:
   patch: 0
   instctx: openssl
   instbuild64: C:\OpenSSL_build
-  instlicense: openssl/LICENSE.txt
+  instlicense: ../openssl/LICENSE.txt
 
 jobs:
   build:
