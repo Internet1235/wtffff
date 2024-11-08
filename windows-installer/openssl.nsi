@@ -39,15 +39,15 @@ FunctionEnd
 SectionGroup "64 Bit Installation"
     Section "64 Bit Binaries"
         SetOutPath $INSTDIR\x86_64\lib
-        File /r "${BUILD64}\Program Files\OpenSSL\lib\"
+        File /r "${BUILD64}\lib\"
         SetOutPath $INSTDIR\x86_64\bin
-        File /r "${BUILD64}\Program Files\OpenSSL\bin\"
+        File /r "${BUILD64}\bin\"
         SetOutPath "$INSTDIR\x86_64\Common Files"
-        File /r "${BUILD64}\Program Files\Common Files\"
+        File /r "${BUILD64}\Common Files\"
     SectionEnd
     Section "x86_64 Development Headers"
         SetOutPath $INSTDIR\x86_64\include
-        File /r "${BUILD64}\Program Files\OpenSSL\include\"
+        File /r "${BUILD64}\include\"
     SectionEnd
 SectionGroupEnd
 !endif
@@ -55,7 +55,7 @@ SectionGroupEnd
 !ifdef BUILD64
 Section "Documentation"
     SetOutPath $INSTDIR\html
-    File /r "${BUILD64}\Program Files\OpenSSL\html\"
+    File /r "${BUILD64}\html\"
 SectionEnd
 !endif
 
