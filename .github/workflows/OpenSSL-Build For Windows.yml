@@ -59,6 +59,7 @@ jobs:
       run:  .\nsis-3.10-setup.exe /s
 
     - name: Build installer
+      shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         cd windows-installer
