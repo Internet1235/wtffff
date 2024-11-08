@@ -43,7 +43,7 @@ SectionGroup "64 Bit Installation"
         SetOutPath $INSTDIR\x86_64\bin
         File /r "${BUILD64}\bin\"
         SetOutPath "$INSTDIR\x86_64\Common Files"
-        File /r "${BUILD64}\Common Files\"
+        File /r "C:\Program Files\Common Files\"
     SectionEnd
     Section "x86_64 Development Headers"
         SetOutPath $INSTDIR\x86_64\include
