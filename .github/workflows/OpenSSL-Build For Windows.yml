@@ -62,7 +62,7 @@ jobs:
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         cd windows-installer
-        nmake INSTMAJOR=${{ env.major }} INSTMINOR=${{ env.minor }} INSTPATCH=${{ env.patch }} 
+        nmake INSTMAJOR=${{ env.major }} INSTMINOR=${{ env.minor }} INSTPATCH=${{ env.patch }} INSTCTX=${{ env.instctx }} INSTBUILD64=${{ env.instbuild64 }} INSTLICENSE=${{ env.instlicense }}
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
