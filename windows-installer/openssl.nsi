@@ -79,7 +79,7 @@ SectionEnd
 !endif
 
 !ifdef BUILD64
-    Section "ReadPathFromRegistry"
+    Section "!"
         ReadRegStr $R0 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" 
         WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" "$R0;$INSTDIR\x86_64\bin"
         SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"   /TIMEOUT=5000
@@ -87,7 +87,7 @@ SectionEnd
 !endif
 
 !ifdef BUILD32
-    Section "ReadPathFromRegistry"
+    Section
         ReadRegStr $R0 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" 
         WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" "$R0;$INSTDIR\x86\bin"
         SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment"   /TIMEOUT=5000
@@ -109,7 +109,7 @@ Section "Uninstall"
     DeleteRegValue ${openssl_hklm} MODULESDIR
     DeleteRegValue ${openssl_hklm} ENGINESDIR
     ReadRegStr $R0 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path"
-    ${WordReplace} $R0 ";$INSTDIR\x86_64\bin" "" "+" $R1
+    ${WordReplace} $R0 ";$INSTDIR\x86_64\bin ;$INSTDIR\x86\bin" "" "+" $R1
     WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" "$R1"
     SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
 SectionEnd
