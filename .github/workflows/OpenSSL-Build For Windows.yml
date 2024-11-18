@@ -43,12 +43,12 @@ jobs:
     - name: Configure OpenSSL x64
       run: |
         cd openssl_x64 # 假设你的OpenSSL源代码在仓库的openssl目录下
-        perl ..\openssl\Configure VC-WIN64A no-asm --prefix=C:\OpenSSL_build_x64 # 根据你的需求配置OpenSSL
+        perl ..\openssl\Configure VC-WIN64A no-asm --prefix=${{ env.instbuild64 }} # 根据你的需求配置OpenSSL
 
     - name: Configure OpenSSL x32
       run: |
         cd openssl_x32 # 假设你的OpenSSL源代码在仓库的openssl目录下
-        perl ..\openssl\Configure VC-WIN32 no-asm --prefix=C:\OpenSSL_build_x32 # 根据你的需求配置OpenSSL
+        perl ..\openssl\Configure VC-WIN32 no-asm --prefix=${{ env.instbuild32 }} # 根据你的需求配置OpenSSL
 
     - name: Build OpenSSL x64
       shell: cmd
@@ -87,13 +87,13 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: openssl-windows_x64
-        path: C:\OpenSSL_build_x64 # 上传编译好的OpenSSL文件作为构建产物
+        path: ${{ env.instbuild64 }} # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
       with:
         name: openssl-windows_x32
-        path: C:\OpenSSL_build_x32 # 上传编译好的OpenSSL文件作为构建产物
+        path: ${{ env.instbuild32 }} # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Upload installer as artifact
       uses: actions/upload-artifact@main
@@ -110,7 +110,6 @@ jobs:
         7z a openssl-for-windows_x32.zip .\OpenSSL_build_x32\
         echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $env:GITHUB_OUTPUT
         echo "status=success" >> $env:GITHUB_OUTPUT
-        
 
     - name: Upload firmware to release
       if: steps.tag.outputs.status == 'success'
