@@ -11,6 +11,7 @@ env:
   instbuild32: C:\OpenSSL_build_x32
   instbuild64: C:\OpenSSL_build_x64
   instlicense: ../openssl/LICENSE.txt
+  TZ: China Standard Time
 
 jobs:
   build:
@@ -21,7 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        choco install perl
+        choco install strawberryperl
         choco install nasm
         choco install make
         # 安装其他可能需要的依赖，如VC++ Build Tools等，如果需要可以添加
@@ -66,16 +67,6 @@ jobs:
         nmake /S
         nmake /S install
 
-    - name: download NSIS installer
-      uses: suisei-cn/actions-download-file@v1.6.0
-      with:
-        url: "https://downloads.sourceforge.net/project/nsis/NSIS%203/3.10/nsis-3.10-setup.exe"
-        target: _installer/
-
-    - name: Install NSIS 3.10
-      working-directory: _installer
-      run:  .\nsis-3.10-setup.exe /s
-
     - name: Build installer
       shell: cmd
       run: |
@@ -104,7 +95,7 @@ jobs:
     - name: Generate release tag
       id: tag
       run: |
-        Set-TimeZone -ID “China Standard Time”
+        Set-TimeZone -ID “${{ env.TZ }}”
         cd C:\
         7z a openssl-for-windows_x64.zip .\OpenSSL_build_x64\
         7z a openssl-for-windows_x32.zip .\OpenSSL_build_x32\
