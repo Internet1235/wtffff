@@ -66,7 +66,7 @@ SectionGroup "32 Bit Installation"
     SectionEnd
     Section "x86 Development Headers"
         SetOutPath $INSTDIR\x86\include
-        File /r "${BUILD32}\include\"
+        File /r "C:\Program Files (x86)\Common Files\"
     SectionEnd
 SectionGroupEnd
 !endif
