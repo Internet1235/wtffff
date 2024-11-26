@@ -36,7 +36,7 @@ jobs:
      
     - name: Clone source code
       run: |
-        git clone ${{ env.REPO_URL }} -b $env:REPO_BRANCH
+        git clone $env:REPO_URL -b $env:REPO_BRANCH
 
     - name: Create x64 and x32 Folder
       run: |
@@ -46,12 +46,12 @@ jobs:
     - name: Configure OpenSSL x64
       run: |
         cd openssl_x64 # 假设你的OpenSSL源代码在仓库的openssl目录下
-        perl ..\openssl\Configure VC-WIN64A no-asm --prefix=${{ env.instbuild64 }} # 根据你的需求配置OpenSSL
+        perl ..\openssl\Configure VC-WIN64A no-asm --prefix=$env:instbuild64 # 根据你的需求配置OpenSSL
 
     - name: Configure OpenSSL x32
       run: |
         cd openssl_x32 # 假设你的OpenSSL源代码在仓库的openssl目录下
-        perl ..\openssl\Configure VC-WIN32 no-asm --prefix=${{ env.instbuild32 }} # 根据你的需求配置OpenSSL
+        perl ..\openssl\Configure VC-WIN32 no-asm --prefix=$env:instbuild32 # 根据你的需求配置OpenSSL
 
     - name: Build OpenSSL x64
       shell: cmd
@@ -64,7 +64,7 @@ jobs:
     - name: Build OpenSSL x32
       shell: cmd
       run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
         cd openssl_x32
         nmake /S
         nmake /S install
@@ -97,7 +97,7 @@ jobs:
     - name: Generate release tag
       id: tag
       run: |
-        Set-TimeZone -ID “${{ env.TZ }}”
+        Set-TimeZone -ID “$env:TZ”
         cd C:\
         7z a openssl-for-windows_x64.zip .\OpenSSL_build_x64\
         7z a openssl-for-windows_x32.zip .\OpenSSL_build_x32\
