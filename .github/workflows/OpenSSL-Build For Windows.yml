@@ -38,7 +38,7 @@ jobs:
       run: |
         git clone ${{ env.REPO_URL }} -b ${{ env.REPO_BRANCH }}
 
-    - name: Create x64 和 x32 Folder
+    - name: Create x64 and x32 Folder
       run: |
         mkdir openssl_x64
         mkdir openssl_x32
