@@ -58,15 +58,15 @@ SectionGroupEnd
 SectionGroup "32 Bit Installation"
     Section "32 Bit Binaries"
         SetOutPath $INSTDIR\x86\lib
-        File /r "${BUILD32}\Program Files (x86)\OpenSSL\lib\"
+        File /r "${BUILD32}\lib\"
         SetOutPath $INSTDIR\x86\bin
-        File /r "${BUILD32}\Program Files (x86)\OpenSSL\bin\"
+        File /r "${BUILD32}\bin\"
         SetOutPath "$INSTDIR\x86\Common Files"
-        File /r "${BUILD32}\Program Files (x86)\Common Files\"
+        File /r "${BUILD32}\Common Files\"
     SectionEnd
     Section "x86 Development Headers"
         SetOutPath $INSTDIR\x86\include
-        File /r "${BUILD32}\Program Files (x86)\OpenSSL\include\"
+        File /r "${BUILD32}\include\"
     SectionEnd
 SectionGroupEnd
 !endif

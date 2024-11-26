@@ -36,7 +36,7 @@ jobs:
      
     - name: Clone source code
       run: |
-        git clone ${{ env.REPO_URL }} -b ${{ env.REPO_BRANCH }}
+        git clone ${{ env.REPO_URL }} -b $REPO_BRANCH
 
     - name: Create x64 and x32 Folder
       run: |
