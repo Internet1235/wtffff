@@ -97,7 +97,7 @@ jobs:
     - name: Generate release tag
       id: tag
       run: |
-        Set-TimeZone -ID “$env:TZ”
+        Set-TimeZone -ID “${{ env.TZ }}”
         cd C:\
         7z a openssl-for-windows_x64.zip .\OpenSSL_build_x64\
         7z a openssl-for-windows_x32.zip .\OpenSSL_build_x32\
@@ -112,5 +112,6 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.tag-name }}
         files: |
-            C:\openssl-for-windows*.zip
+            C:\openssl-for-windows_x64.zip
+            C:\openssl-for-windows_x32.zip
             windows-installer/openssl*.exe
