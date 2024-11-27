@@ -10,8 +10,7 @@ env:
   minor: 5
   patch: 0
   instctx: openssl
-  instbuild32: C:\OpenSSL_build_x32
-  instbuild64: C:\OpenSSL_build_x64
+  instbuild64: C:\OpenSSL_build
   instlicense: ../openssl/LICENSE.txt
   TZ: China Standard Time
 
@@ -38,34 +37,16 @@ jobs:
       run: |
         git clone $env:REPO_URL -b $env:REPO_BRANCH
 
-    - name: Create x64 and x32 Folder
+    - name: Configure OpenSSL
       run: |
-        mkdir openssl_x64
-        mkdir openssl_x32
+        cd openssl # 假设你的OpenSSL源代码在仓库的openssl目录下
+        perl Configure VC-WIN64A no-asm --prefix=$env:instbuild64 # 根据你的需求配置OpenSSL
 
-    - name: Configure OpenSSL x64
-      run: |
-        cd openssl_x64 # 假设你的OpenSSL源代码在仓库的openssl目录下
-        perl ..\openssl\Configure VC-WIN64A no-asm --prefix=$env:instbuild64 # 根据你的需求配置OpenSSL
-
-    - name: Configure OpenSSL x32
-      run: |
-        cd openssl_x32 # 假设你的OpenSSL源代码在仓库的openssl目录下
-        perl ..\openssl\Configure VC-WIN32 no-asm --prefix=$env:instbuild32 # 根据你的需求配置OpenSSL
-
-    - name: Build OpenSSL x64
+    - name: Build OpenSSL
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-        cd openssl_x64
-        nmake /S
-        nmake /S install
-
-    - name: Build OpenSSL x32
-      shell: cmd
-      run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
-        cd openssl_x32
+        cd openssl
         nmake /S
         nmake /S install
 
@@ -74,19 +55,13 @@ jobs:
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         cd windows-installer
-        nmake /S INSTMAJOR=${{ env.major }} INSTMINOR=${{ env.minor }} INSTPATCH=${{ env.patch }} INSTCTX=${{ env.instctx }} INSTBUILD32=${{ env.instbuild32 }} INSTBUILD64=${{ env.instbuild64 }} INSTLICENSE=${{ env.instlicense }}
+        nmake /S INSTMAJOR=${{ env.major }} INSTMINOR=${{ env.minor }} INSTPATCH=${{ env.patch }} INSTCTX=${{ env.instctx }} INSTBUILD64=${{ env.instbuild64 }} INSTLICENSE=${{ env.instlicense }}
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
       with:
-        name: openssl-windows_x64
+        name: openssl-windows
         path: ${{ env.instbuild64 }} # 上传编译好的OpenSSL文件作为构建产物
-
-    - name: Archive artifacts
-      uses: actions/upload-artifact@main
-      with:
-        name: openssl-windows_x32
-        path: ${{ env.instbuild32 }} # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Upload installer as artifact
       uses: actions/upload-artifact@main
@@ -97,10 +72,9 @@ jobs:
     - name: Generate release tag
       id: tag
       run: |
-        Set-TimeZone -ID “${{ env.TZ }}”
+        Set-TimeZone -ID "$env:TZ"
         cd C:\
-        7z a openssl-for-windows_x64.zip .\OpenSSL_build_x64\
-        7z a openssl-for-windows_x32.zip .\OpenSSL_build_x32\
+        7z a openssl-for-windows.zip .\OpenSSL_build\
         echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $env:GITHUB_OUTPUT
         echo "status=success" >> $env:GITHUB_OUTPUT
 
@@ -112,6 +86,5 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.tag-name }}
         files: |
-            C:\openssl-for-windows_x64.zip
-            C:\openssl-for-windows_x32.zip
+            C:\openssl-for-windows.zip
             windows-installer/openssl*.exe
