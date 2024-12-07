@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/OpenSSL-Build For Windows.yml
+    uses: ./.github/workflows/test.yml
     with:
       major: 3
       minor: 4
