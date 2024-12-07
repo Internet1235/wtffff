@@ -85,7 +85,7 @@ jobs:
     - name: Generate release tag
       id: tag
       run: |
-        Set-TimeZone -ID "$env:TZ"
+        Set-TimeZone -ID "${{ env.TZ }}"
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
         echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $env:GITHUB_OUTPUT

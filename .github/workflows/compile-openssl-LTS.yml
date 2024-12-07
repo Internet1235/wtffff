@@ -1,0 +1,13 @@
+name: openssl-LTS for windows
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  builds:
+    uses: ./.github/workflows/test.yml
+    with:
+      major: 3
+      minor: 0
+      patch: 15
+      REPO_BRANCH: openssl-3.0.15
