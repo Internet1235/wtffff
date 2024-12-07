@@ -27,7 +27,7 @@ env:
   instlicense: ../openssl/LICENSE.txt
 
 jobs:
-  build:
+  builds:
     runs-on: windows-latest
     steps:
     - name: Checkout code

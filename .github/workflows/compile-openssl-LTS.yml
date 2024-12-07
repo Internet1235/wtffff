@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  builds:
+  build:
     uses: ./.github/workflows/test.yml
     with:
       major: 3
