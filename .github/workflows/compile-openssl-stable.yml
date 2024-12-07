@@ -1,4 +1,4 @@
-name: openssl v3.4.0 for windows
+name: openssl stable for windows
 
 on: 
   workflow_dispatch:
