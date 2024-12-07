@@ -1,0 +1,13 @@
+name: openssl v3.4.0 for windows
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/OpenSSL-Build For Windows.yml
+    with:
+      major: 3
+      minor: 4
+      patch: 0
+      REPO_BRANCH: openssl-3.4.0
