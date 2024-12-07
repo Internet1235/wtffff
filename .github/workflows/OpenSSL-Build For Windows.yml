@@ -1,11 +1,24 @@
 name: Build OpenSSL on Windows
 
 on:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      major:
+        type: string
+        required: true
+      minor: 
+        type: string
+        required: true
+      patch: 
+        type: string
+        required: true
+      REPO_BRANCH:
+        type: string
+        required: true
+        
 
 env:
   REPO_URL: https://github.com/openssl/openssl.git
-  REPO_BRANCH: master # 默认最新版
   major: 3
   minor: 5
   patch: 0
@@ -35,7 +48,7 @@ jobs:
      
     - name: Clone source code
       run: |
-        git clone $env:REPO_URL -b $env:REPO_BRANCH
+        git clone $env:REPO_URL -b ${{ inputs.REPO_BRANCH }}
 
     - name: Configure OpenSSL
       run: |
@@ -55,7 +68,7 @@ jobs:
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         cd windows-installer
-        nmake /S INSTMAJOR=${{ env.major }} INSTMINOR=${{ env.minor }} INSTPATCH=${{ env.patch }} INSTCTX=${{ env.instctx }} INSTBUILD64=${{ env.instbuild64 }} INSTLICENSE=${{ env.instlicense }}
+        nmake /S INSTMAJOR=${{ inputs.major }} INSTMINOR=${{ inputs.minor }} INSTPATCH=${{ inputs.patch }} INSTCTX=${{ env.instctx }} INSTBUILD64=${{ env.instbuild64 }} INSTLICENSE=${{ env.instlicense }}
 
     - name: Archive artifacts
       uses: actions/upload-artifact@main
