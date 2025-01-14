@@ -7,7 +7,7 @@ jobs:
   build:
     uses: ./.github/workflows/test.yml
     with:
-      major: 3
-      minor: 0
-      patch: 15
+      major: 1
+      minor: 1
+      patch: 1w
       REPO_BRANCH: OpenSSL_1_1_1w
