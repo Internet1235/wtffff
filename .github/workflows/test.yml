@@ -23,9 +23,8 @@ env:
   minor: 5
   patch: 0
   instctx: openssl
-  installer: flase
   instbuild64: C:\OpenSSL_build
-  instlicense: ../openssl/LICENSE.txt
+  instlicense: ../openssl/LICENSE
 
 jobs:
   builds:
@@ -64,7 +63,6 @@ jobs:
         nmake /S install
 
     - name: Build installer
-      if: ${{ env.installer }} == 'true'
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
@@ -78,7 +76,6 @@ jobs:
         path: ${{ env.instbuild64 }} # 上传编译好的OpenSSL文件作为构建产物
 
     - name: Upload installer as artifact
-      if: ${{ env.installer }} == 'true'
       uses: actions/upload-artifact@main
       with:
         name: openssl-installer
@@ -102,3 +99,4 @@ jobs:
         tag_name: ${{ steps.tag.outputs.tag-name }}
         files: |
             C:\openssl-for-windows.zip
+            windows-installer/openssl*.exe
