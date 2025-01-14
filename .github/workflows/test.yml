@@ -24,7 +24,7 @@ env:
   patch: 0
   instctx: openssl
   instbuild64: C:\OpenSSL_build
-  instlicense: ../openssl/LICENSE.txt
+  instlicense: ../openssl/LICENSE*
 
 jobs:
   builds:
@@ -87,7 +87,7 @@ jobs:
         Set-TimeZone -ID "China Standard Time"
         cd C:\
         7z a openssl-for-windows.zip .\OpenSSL_build\
-        echo "tag-name=$(date +"%Y.%m.%d-%H%M")" >> $env:GITHUB_OUTPUT
+        echo "tag-name=openssl-v${{ inputs.major }}-${{ inputs.minor }}-${{ inputs.patch }}" >> $env:GITHUB_OUTPUT
         echo "status=success" >> $env:GITHUB_OUTPUT
 
     - name: Upload firmware to release
