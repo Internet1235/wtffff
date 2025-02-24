@@ -8,6 +8,6 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       major: 3
-      minor: 4
-      patch: 0
-      REPO_BRANCH: master
+      minor: 3
+      patch: 4-dev
+      REPO_BRANCH: openssl-3.3
