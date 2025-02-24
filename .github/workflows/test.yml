@@ -27,7 +27,7 @@ env:
   instlicense: ../openssl/LICENSE.txt
 
 jobs:
-  builds:
+  Build:
     runs-on: windows-latest
     steps:
     - name: Checkout code
@@ -62,7 +62,7 @@ jobs:
         nmake /S
         nmake /S install
 
-    - name: Build installer
+    - name: Build Installer
       shell: cmd
       run: |
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
