@@ -9,5 +9,5 @@ jobs:
     with:
       major: 3
       minor: 0
-      patch: 16
-      REPO_BRANCH: openssl-3.0.16
+      patch: 17
+      REPO_BRANCH: openssl-3.0.17
