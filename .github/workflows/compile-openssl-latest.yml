@@ -11,3 +11,4 @@ jobs:
       minor: 6
       patch: 0-dev
       REPO_BRANCH: master
+      PRE: true
