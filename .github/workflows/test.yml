@@ -15,7 +15,10 @@ on:
       REPO_BRANCH:
         type: string
         required: true
-        
+      PRE:
+        type: boolean
+        default: false
+        required: false
 
 env:
   REPO_URL: https://github.com/openssl/openssl.git
@@ -98,6 +101,7 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.tag-name }}
         name: openssl-v${{ inputs.major }}.${{ inputs.minor }}.${{ inputs.patch }}
+        prerelease: ${{ inputs.PRE }}
         files: |
             C:\openssl-for-windows.zip
             windows-installer/openssl*.exe
